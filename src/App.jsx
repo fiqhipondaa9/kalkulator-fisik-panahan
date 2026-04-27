@@ -197,7 +197,7 @@ export default function App() {
             </h1>
           </div>
           <div className="text-left md:text-right w-full md:w-auto">
-            {!isExporting && (
+          {!isExporting && (
               <div className="no-print flex flex-wrap items-center justify-start md:justify-end gap-3 mb-2">
                 <button onClick={handleReset} className="bg-white/10 hover:bg-rose-500/90 text-white px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 text-xs font-bold tracking-wider backdrop-blur-sm border border-white/10 hover:border-rose-500/50 shadow-lg">
                   <IconReset /> <span className="hidden md:inline">Reset</span>
@@ -207,7 +207,12 @@ export default function App() {
                 </button>
               </div>
             )}
-            <p className="font-bold text-emerald-600/60 text-[10px] tracking-[0.2em] uppercase mt-2">Target Presisi & Stabilitas</p>
+            <div className="mt-3">
+              <p className="font-bold text-emerald-600/60 text-[10px] tracking-[0.2em] uppercase">Target Presisi & Stabilitas</p>
+              <p className="font-black text-emerald-500/40 text-[9px] tracking-[0.3em] uppercase mt-1">
+                By <span className="text-white">fiqhipondaa9</span>
+              </p>
+            </div>
           </div>
         </div>
       </header>
