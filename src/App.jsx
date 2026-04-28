@@ -114,6 +114,32 @@ export default function App() {
     return { bmi, status, color };
   }, [anthro.weight, anthro.height]);
 
+  const proportionData = useMemo(() => {
+    const h = parseFloat(anthro.height);
+    const arm = parseFloat(anthro.armSpan);
+    const sit = parseFloat(anthro.sitHeight);
+
+    let apeIndex = { value: 0, text: '-', color: 'text-slate-400', desc: 'Isi Tinggi & Lengan' };
+    let legRatio = { value: 0, text: '-', color: 'text-slate-400', desc: 'Isi Tinggi Duduk' };
+
+    if (h > 0 && arm > 0) {
+      const ratio = arm / h;
+      if (ratio > 1.02) apeIndex = { value: ratio.toFixed(2), text: 'Superior', color: 'text-emerald-500', desc: 'Jangkauan Draw Bebas' };
+      else if (ratio >= 1.0) apeIndex = { value: ratio.toFixed(2), text: 'Ideal', color: 'text-blue-500', desc: 'Proporsi Normal' };
+      else apeIndex = { value: ratio.toFixed(2), text: 'Standar', color: 'text-rose-500', desc: 'Jangkauan Pendek' };
+    }
+
+    if (h > 0 && sit > 0 && sit < h) {
+      const legLength = h - sit;
+      const legPercentage = (legLength / h) * 100;
+      if (legPercentage >= 50) legRatio = { value: legPercentage.toFixed(1) + '%', text: 'Tungkai Panjang', color: 'text-emerald-500', desc: 'Tuas Stabilitas Tinggi' };
+      else if (legPercentage >= 47) legRatio = { value: legPercentage.toFixed(1) + '%', text: 'Tungkai Ideal', color: 'text-blue-500', desc: 'Proporsi Seimbang' };
+      else legRatio = { value: legPercentage.toFixed(1) + '%', text: 'Tungkai Pendek', color: 'text-rose-500', desc: 'Titik Gravitasi Rendah' };
+    }
+
+    return { apeIndex, legRatio };
+  }, [anthro.height, anthro.armSpan, anthro.sitHeight]);
+
   const scores = useMemo(() => ({
     storkRight: getScoreArchery('storkRight', identity.gender, tests.storkRight),
     storkLeft: getScoreArchery('storkLeft', identity.gender, tests.storkLeft),
@@ -258,6 +284,35 @@ export default function App() {
                  {bmiData.status !== '-' && <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-white shadow-inner ${bmiData.color}`}>{bmiData.status}</span>}
                </div>
             </div>
+
+            {/* KOTAK RASIO TUNGKAI & LENGAN (PANAHAN) */}
+            {(anthro.height > 0 && (anthro.armSpan > 0 || anthro.sitHeight > 0)) && (
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10 animate-in fade-in">
+                <div className="bg-white border border-slate-200 rounded-[2rem] p-5 shadow-sm flex flex-col justify-center relative overflow-hidden">
+                   <div className="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
+                   <div className="flex justify-between items-start mb-2 pl-2">
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Ape Index</span>
+                      <span className={`text-[9px] bg-slate-50 border border-slate-100 px-2 py-1 rounded-lg font-black uppercase tracking-widest ${proportionData.apeIndex.color}`}>{proportionData.apeIndex.text}</span>
+                   </div>
+                   <div className="flex items-end gap-2 pl-2 mt-1">
+                      <span className="text-3xl font-black text-slate-900 leading-none">{proportionData.apeIndex.value}</span>
+                   </div>
+                   <p className="text-[10px] font-bold text-slate-400 mt-2 pl-2 uppercase tracking-widest">{proportionData.apeIndex.desc}</p>
+                </div>
+                
+                <div className="bg-white border border-slate-200 rounded-[2rem] p-5 shadow-sm flex flex-col justify-center relative overflow-hidden">
+                   <div className="absolute top-0 left-0 w-1.5 h-full bg-[#022c22]"></div>
+                   <div className="flex justify-between items-start mb-2 pl-2">
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Rasio Tungkai</span>
+                      <span className={`text-[9px] bg-slate-50 border border-slate-100 px-2 py-1 rounded-lg font-black uppercase tracking-widest ${proportionData.legRatio.color}`}>{proportionData.legRatio.text}</span>
+                   </div>
+                   <div className="flex items-end gap-2 pl-2 mt-1">
+                      <span className="text-3xl font-black text-slate-900 leading-none">{proportionData.legRatio.value}</span>
+                   </div>
+                   <p className="text-[10px] font-bold text-slate-400 mt-2 pl-2 uppercase tracking-widest">{proportionData.legRatio.desc}</p>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200">
