@@ -219,7 +219,7 @@ export default function App() {
               PERMENPORA 15 TAHUN 2024
             </div>
             <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
-              KALKULATOR FISIK<br/><span className="text-emerald-400">PANAHAN (PERPANI)</span>
+              KALKULATOR FISIK<br/><span className="text-emerald-400">PANAHAN</span>
             </h1>
           </div>
           <div className="text-left md:text-right w-full md:w-auto">
@@ -234,7 +234,7 @@ export default function App() {
               </div>
             )}
             <div className="mt-3">
-              <p className="font-bold text-emerald-600/60 text-[10px] tracking-[0.2em] uppercase">Target Presisi & Stabilitas</p>
+              <p className="font-bold text-emerald-600/60 text-[10px] tracking-[0.2em] uppercase">Platform Olahraga</p>
               <p className="font-black text-emerald-500/40 text-[9px] tracking-[0.3em] uppercase mt-1">
                 By <span className="text-white">fiqhipondaa9</span>
               </p>
@@ -318,7 +318,7 @@ export default function App() {
           <div className="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200">
             <div className="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
               <div className="bg-emerald-100 text-emerald-600 p-2.5 rounded-2xl"><IconTarget /></div>
-              <h2 className="text-xl font-black text-slate-900 uppercase tracking-wide">Pengujian Stabilitas & Traksi</h2>
+              <h2 className="text-xl font-black text-slate-900 uppercase tracking-wide">Rekam Hasil Tes Fisik</h2>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
