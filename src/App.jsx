@@ -263,7 +263,7 @@ export default function App() {
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-slate-500 uppercase ml-1 tracking-wider">Jenis Kelamin</label>
                 <select value={identity.gender} onChange={e => setIdentity({...identity, gender: e.target.value})} className={`${inputClass} cursor-pointer`}>
-                  <option value="Putra">Putra (Laki-laki)</option><option value="Putri">Putri (Perempuan)</option>
+                  <option value="Putra">Putra (Male)</option><option value="Putri">Putri (Female)</option>
                 </select>
               </div>
             </div>
